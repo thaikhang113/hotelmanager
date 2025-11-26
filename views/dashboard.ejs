@@ -1,4 +1,4 @@
-<%- include('layout', { body: `
+<%- include('header') %>
     <h2 class="mb-4">Dashboard</h2>
     <% if (typeof error !== 'undefined' && error) { %>
         <div class="alert alert-warning"><%= error %></div>
@@ -34,4 +34,4 @@
     <% } else { %>
         <div class="alert alert-info">No dashboard data available from server.</div>
     <% } %>
-`}) %>
+<%- include('footer') %>

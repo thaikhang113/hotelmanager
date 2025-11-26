@@ -1,4 +1,4 @@
-<%- include('../layout', { body: `
+<%- include('../header') %>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Room Management</h2>
         <a href="/rooms/create" class="btn btn-primary">Add Room</a>
@@ -21,26 +21,30 @@
                 </tr>
             </thead>
             <tbody>
-                <% rooms.forEach(room => { %>
-                    <tr>
-                        <td><%= room.room_number %></td>
-                        <td><%= room.room_type_name %></td>
-                        <td><%= room.floor %></td>
-                        <td><%= room.price_per_night %></td>
-                        <td>
-                            <span class="badge bg-<%= room.status === 'available' ? 'success' : 'danger' %>">
-                                <%= room.status %>
-                            </span>
-                        </td>
-                        <td>
-                            <a href="/rooms/<%= room.room_id %>/edit" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="/rooms/<%= room.room_id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                <% }) %>
+                <% if (rooms && rooms.length > 0) { %>
+                    <% rooms.forEach(room => { %>
+                        <tr>
+                            <td><%= room.room_number %></td>
+                            <td><%= room.room_type_name %></td>
+                            <td><%= room.floor %></td>
+                            <td><%= room.price_per_night %></td>
+                            <td>
+                                <span class="badge bg-<%= room.status === 'available' ? 'success' : 'danger' %>">
+                                    <%= room.status %>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="/rooms/<%= room.room_id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="/rooms/<%= room.room_id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr><td colspan="6">No rooms found.</td></tr>
+                <% } %>
             </tbody>
         </table>
     </div>
-`}) %>
+<%- include('../footer') %>

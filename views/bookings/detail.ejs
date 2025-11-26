@@ -1,4 +1,4 @@
-<%- include('../layout', { body: `
+<%- include('../header') %>
     <div class="d-flex justify-content-between mb-4">
         <h2>Booking Details #<%= booking.booking_id %></h2>
         <a href="/bookings" class="btn btn-secondary">Back</a>
@@ -43,4 +43,4 @@
             <button type="submit" class="btn btn-warning btn-lg">Check Out Now</button>
         </form>
     <% } %>
-`}) %>
+<%- include('../footer') %>

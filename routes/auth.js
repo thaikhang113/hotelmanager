@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config();
 
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin') {
+    
+    const validUser = process.env.ADMIN_USER || 'admin';
+    const validPass = process.env.ADMIN_PASS || 'admin';
+
+    if (username === validUser && password === validPass) {
         const dummyToken = Buffer.from(`${username}:${Date.now()}`).toString('base64');
         res.cookie('token', dummyToken, { httpOnly: true, maxAge: 3600000 });
         res.cookie('user', JSON.stringify({ username: 'Admin', role: 'admin' }), { httpOnly: true, maxAge: 3600000 });

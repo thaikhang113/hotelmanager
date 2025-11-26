@@ -1,0 +1,46 @@
+<%- include('../layout', { body: `
+    <div class="d-flex justify-content-between mb-4">
+        <h2>Booking Details #<%= booking.booking_id %></h2>
+        <a href="/bookings" class="btn btn-secondary">Back</a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Customer Info</h5>
+            <p><strong>Name:</strong> <%= booking.username %></p>
+            <p><strong>Email:</strong> <%= booking.email %></p>
+            <p><strong>Status:</strong> <%= booking.status %></p>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Rooms Booked</h4>
+    <ul class="list-group mb-4">
+        <% if (booking.rooms) { %>
+            <% booking.rooms.forEach(room => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Room <%= room.room_number %> - Floor <%= room.floor %>
+                    <span class="badge bg-primary rounded-pill"><%= room.price_at_booking %> VND</span>
+                </li>
+            <% }) %>
+        <% } %>
+    </ul>
+
+    <h4 class="mt-4">Services Used</h4>
+    <ul class="list-group mb-4">
+        <% if (booking.services && booking.services.length > 0) { %>
+            <% booking.services.forEach(service => { %>
+                <li class="list-group-item">
+                    <%= service.name %> (x<%= service.quantity %>) - <%= service.service_price %> VND
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li class="list-group-item">No services used</li>
+        <% } %>
+    </ul>
+
+    <% if (booking.status === 'confirmed' || booking.status === 'checked_in') { %>
+        <form action="/bookings/<%= booking.booking_id %>/checkout" method="POST" class="mt-4">
+            <button type="submit" class="btn btn-warning btn-lg">Check Out Now</button>
+        </form>
+    <% } %>
+`}) %>

@@ -1,5 +1,0 @@
-1. Auth Mechanism: The provided backend source code (server.js) explicitly states that Auth Middleware was removed and replaced with a user emulation middleware. Therefore, the frontend implements a simulated login that sets a cookie for the client side, but the backend requests do not require a real valid JWT from an auth server.
-2. Token Refresh: The backend does not expose a /auth/refresh endpoint. The frontend wrapper is prepared to handle 401 errors, but currently, it will just redirect to login if unauthorized.
-3. Payload Chunking: The backend does not expose a specific chunked upload endpoint. The frontend enforces a 5MB payload limit and throws an error if exceeded.
-4. Dashboard Data: The dashboard view assumes the /api/reports/dashboard endpoint returns an object with totalRevenue, activeBookings, and availableRooms.
-5. Environment: The app assumes it is running in an environment where it can reach 217.216.72.223 on port 3000 via HTTP.

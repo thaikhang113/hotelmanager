@@ -6,8 +6,7 @@ const Navbar = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
+        localStorage.clear();
         navigate('/login');
     };
 
@@ -16,11 +15,11 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div className="container">
-                <Link className="navbar-brand" to="/">Hotel Demo</Link>
+                <Link className="navbar-brand" to="/">Hotel System</Link>
                 <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav me-auto">
                         <li className="nav-item"><Link className="nav-link" to="/">Dashboard</Link></li>
-                        {(user.is_staff || user.username === 'admin') && (
+                        {user.is_staff && (
                             <>
                                 <li className="nav-item"><Link className="nav-link" to="/staff">Staff</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/customers">Customers</Link></li>
@@ -30,7 +29,7 @@ const Navbar = () => {
                         <li className="nav-item"><Link className="nav-link" to="/bookings">Bookings</Link></li>
                     </ul>
                     <div className="d-flex align-items-center text-white">
-                        <span className="me-3">Hi, {user.username} ({user.is_staff ? 'Staff' : 'User'})</span>
+                        <span className="me-3">Hi, {user.username}</span>
                         <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>Logout</button>
                     </div>
                 </div>

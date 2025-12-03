@@ -7,12 +7,14 @@ const CustomerManager = () => {
     useEffect(() => { fetchCustomers(); }, []);
 
     const fetchCustomers = async () => {
-        const res = await axiosClient.get('/customers');
-        setCustomers(res.data);
+        try {
+            const res = await axiosClient.get('/customers');
+            setCustomers(res.data);
+        } catch (e) { console.error(e); }
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('Deactivate user?')) {
+        if (window.confirm('Deactivate?')) {
             try { await axiosClient.delete(`/customers/${id}`); fetchCustomers(); } 
             catch (err) { alert(err.message); }
         }
@@ -20,7 +22,7 @@ const CustomerManager = () => {
 
     return (
         <div className="container">
-            <h3>Customer List</h3>
+            <h3>Customers</h3>
             <table className="table table-striped">
                 <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Active</th><th>Action</th></tr></thead>
                 <tbody>

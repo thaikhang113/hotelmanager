@@ -3,6 +3,6 @@ services:
   hotel-frontend:
     build: .
     ports:
-      - "8080:8080"
+      - "8080:80"
     restart: always
     container_name: hotel_frontend

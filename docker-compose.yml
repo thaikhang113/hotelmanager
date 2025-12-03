@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./frontend
+    ports:
+      - "3001:3001"
+    restart: always
+    environment:
+      - VITE_API_URL=http://217.216.72.223
